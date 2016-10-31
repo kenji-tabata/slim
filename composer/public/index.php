@@ -20,23 +20,8 @@ $config = [
 
 $app = new \Slim\App($config);
 
-// Get container
-$container = $app->getContainer();
+require_once __DIR__ . '/../src/dependencie.php';
 
-// Register component on container
-$container['view'] = function ($container) {
-    return new \Slim\Views\PhpRenderer(__DIR__ . '/../templates/');
-};
-
-$app->get('/', function ($request, $response) {
-    return $this->view->render($response, 'index.phtml');
-});
-
-$app->get('/hello/{name}', function ($request, $response) {
-    $name = $request->getAttribute('name');
-    $response->getBody()->write("Hello, $name");
-
-    return $response;
-});
+require_once __DIR__ . '/../src/route.php';
 
 $app->run();
