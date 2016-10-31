@@ -22,3 +22,8 @@
     $ mkdir slim
     $ cd slim
     $ composer require slim/slim "^3.0"
+
+
+## Executando
+
+    $ php -S localhost:8000 -t public public/index.php
