@@ -9,63 +9,24 @@
     $ composer install
 
 
-
-### Projeto completo
-
-    $ composer create-project slim/slim-skeleton slim
-    $ cd slim
-
-
-
-### Somente o pacote inicial do Slim
-
-    $ mkdir slim
-    $ cd slim
-    $ composer require slim/slim "^3.0"
-
-
 ## Executando
 
     $ php -S localhost:8000 -t public public/index.php
 
 
+## Arquivos estáticos
 
-## Exemplos para estrutura de arquivos do Slim:
+Todos os arquivos estáticos devem ficar na pasta web
 
-Retirado do Blog Slim:
+No arquivo app.php adicione o código abaixo para o servidor embutido localizar os arquivos estáticos
 
-http://www.slimframework.com/2011/09/24/how-to-organize-a-large-slim-framework-application.html
+    if (PHP_SAPI == 'cli-server') {
+        // To help the built-in PHP dev server, check if the request was actually for
+        // something which should probably be served as a static file
+        $url  = parse_url($_SERVER['REQUEST_URI']);
+        $file = __DIR__ . $url['path'];
+        if (is_file($file)) {
+            return false;
+        }
+    }
 
-    public_html/
-        .htaccess
-        index.php
-        styles/
-        images/
-        scripts/
-    app/
-        routes/
-            session.php
-            member.php
-            admin.php
-        vendor/
-        lib/
-        data/
-
-
-Do Create Project:
-
-    logs/
-    public/
-        css/
-        js/
-        .htaccess
-        index.php
-    src/
-        dependencies.php
-        middleware.php
-        routes.php
-        settings.php
-    templates/
-        index.phtml
-    tests/
-    vendor/
